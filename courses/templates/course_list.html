@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Lista de Cursos
+{% endblock %}
+
+{% block content %}
+    <h1>Lista de Cursos</h1>
+
+    {% if courses %}
+    <table>
+        <thead>
+            <tr>
+                <th >Nome</th>
+                <th >Carga horária</th>
+                <th >Valor da inscrição</th>
+                <th >Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td >{{ course.name }}</td>
+                <td >{{ course.duration_hours }}</td>
+                <td >{{ course.enrollment_fee }}</td>
+                <td >{{ course.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhum curso encontrado.</p>
+    {% endif %}
+
+{% endblock %}
