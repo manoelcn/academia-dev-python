@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Lista de Matrículas
+{% endblock %}
+
+{% block content %}
+    <h1>Lista de Matrículas</h1>
+
+    {% if enrollments %}
+    <table>
+        <thead>
+            <tr>
+                <th >Nome</th>
+                <th >Curso</th>
+                <th >Data da matrícula</th>
+                <th >Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in enrollments %}
+            <tr>
+                <td >{{ enrollment.student.name }}</td>
+                <td >{{ enrollment.course.name }}</td>
+                <td >{{ enrollment.enrollment_date }}</td>
+                <td >{{ enrollment.status }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Nenhuma matrícula encontrado.</p>
+    {% endif %}
+
+{% endblock %}
