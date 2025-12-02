@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lista Financeira de {{ student.name }}
+{% endblock %}
+
+
+{% block content %}
+{% if student %}
+<ul>
+
+    <li>
+        Total devido pelo aluno: {{ total_paid }}
+    </li>
+    <li>
+        Total pago pelo aluno: {{ total_pending }}
+    </li>
+    {% else %}
+    <p>Nenhum resultado encontrado.</p>
+    {% endif %}
+</ul>
+{% endblock %}
