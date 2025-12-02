@@ -17,3 +17,23 @@ def enrollments_by_status(request):
         enrollments = Enrollment.objects.all()
     context = {'enrollments': enrollments}
     return render(request, 'enrollments_by_status.html', context)
+
+def get_financial_status(request, pk):
+    student = Student.objects.get(pk=pk)
+    paid_enrollments = Enrollment.objects.filter(status='pago', student_id=student)
+    pending_enrollments = Enrollment.objects.filter(status='pendente', student_id=student)
+    total_paid = 0
+    total_pending = 0
+
+    for enrollment in paid_enrollments:
+        total_paid += enrollment.course.enrollment_fee
+
+    for enrollment in pending_enrollments:
+        total_pending += enrollment.course.enrollment_fee
+
+    context = {
+        'student': student,
+        'total_paid': total_paid,
+        'total_pending': total_pending
+        }
+    return render(request, 'student_finance.html', context)
