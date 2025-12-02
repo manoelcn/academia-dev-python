@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lista Financeira de Matrículas
+{% endblock %}
+
+
+{% block content %}
+<p>
+    Filtrar por:
+    <a href="?status=pago">Pagas</a> |
+    <a href="?status=pendente">Pendentes</a> |
+    <a href="{% url 'finance-enrollments' %}">Todas</a>
+</p>
+{% if enrollments %}
+<ul>
+    {% for enrollment in enrollments %}
+    <li>
+        {{ enrollment.student.name }}
+        {{ enrollment.course.name }}
+        {{ enrollment.enrollment_date }}
+        {{ enrollment.status }}
+    </li>
+    {% empty %}
+    <li>Nenhuma matrícula encontrada com este status.</li>
+    {% endfor %}
+    {% else %}
+    <p>Nenhuma matrícula encontrado.</p>
+    {% endif %}
+</ul>
+{% endblock %}
