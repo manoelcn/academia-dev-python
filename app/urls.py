@@ -23,4 +23,5 @@ urlpatterns = [
     path('', home_page, name='home'),
     path('', include('students.urls')),
     path('', include('courses.urls')),
+    path('', include('enrollments.urls')),
 ]
