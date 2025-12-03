@@ -25,7 +25,15 @@
                         <td>{{ enrollment.student.name }}</td>
                         <td>{{ enrollment.course.name }}</td>
                         <td><span class="text-muted small">{{ enrollment.enrollment_date|date:"d/m/Y" }}</span></td>
-                        <td>{{ enrollment.status }}</td>
+                        <td>
+                            {% if enrollment.status == 'pago' %}
+                                <span class="badge bg-success">Pago</span>
+                            {% elif enrollment.status == 'pendente' %}
+                                <span class="badge bg-danger">Pendente</span>
+                            {% else %}
+                                <span class="badge bg-secondary">{{ enrollment.status|capfirst }}</span>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
