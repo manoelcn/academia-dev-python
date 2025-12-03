@@ -5,31 +5,38 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Lista de Matrículas</h1>
+    <h1 class="mt-4 mb-4">Lista de Matrículas</h1>
 
     {% if enrollments %}
-    <table>
-        <thead>
-            <tr>
-                <th >Nome</th>
-                <th >Curso</th>
-                <th >Data da matrícula</th>
-                <th >Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for enrollment in enrollments %}
-            <tr>
-                <td >{{ enrollment.student.name }}</td>
-                <td >{{ enrollment.course.name }}</td>
-                <td >{{ enrollment.enrollment_date }}</td>
-                <td >{{ enrollment.status }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Curso</th>
+                        <th>Data da Matrícula</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for enrollment in enrollments %}
+                    <tr>
+                        <td>{{ enrollment.student.name }}</td>
+                        <td>{{ enrollment.course.name }}</td>
+                        <td><span class="text-muted small">{{ enrollment.enrollment_date|date:"d/m/Y" }}</span></td>
+                        <td>{{ enrollment.status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     {% else %}
-    <p>Nenhuma matrícula encontrado.</p>
+        <div class="alert alert-warning text-center" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Atenção!</strong> Nenhuma matrícula foi encontrado no sistema.
+        </div>
     {% endif %}
 
 {% endblock %}
