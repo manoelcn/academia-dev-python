@@ -1,5 +1,7 @@
 from django.views.generic import ListView, DetailView
-from .models import Student
+from rest_framework import generics
+from students.models import Student
+from students.serializers import StudentSerializer
 from enrollments.models import Enrollment
 
 
@@ -26,3 +28,7 @@ class StudentDetailView(DetailView):
         total = total_paid + total_pending
         context['total'] = total
         return context
+
+class StudentCreateListAPIView(generics.ListCreateAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
