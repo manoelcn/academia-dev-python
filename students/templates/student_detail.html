@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Detalhes do Alunos
+{% endblock %}
+
+{% block content %}
+    <h1>Detalhes de {{ student.name }}</h1>
+
+    {% if student %}
+
+    <table>
+        <thead>
+            <tr>
+                <th >Cursos matriculados</th>
+                <th >Status</th>
+                <th>Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data in enrolled_courses %}
+            <tr>
+                <td >{{ data.course.name }}</td>
+                <td >{{ data.status }}</td> 
+                <td>{{ data.course.enrollment_fee }}</td>
+            </tr>
+            {% endfor %}
+            <p>Totais (pago + pendente): {{ total }}</p>
+        </tbody>
+    </table>
+
+
+
+
+    {% else %}
+    <p>Erro</p>
+    {% endif %}
+
+{% endblock %}
