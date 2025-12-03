@@ -26,7 +26,13 @@
                         <td>{{ course.name }}</td>
                         <td>{{ course.duration_hours }}h</td>
                         <td><span class="text-muted small">R$ {{ course.enrollment_fee }}</span></td>
-                        <td>{{ course.status     }}</td>
+                        <td>
+                            {% if course.status == True %}
+                                <span class="badge bg-success">Ativo</span>
+                            {% else %}
+                                <span class="badge bg-danger">Inativo</span>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
