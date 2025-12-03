@@ -1,15 +1,44 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Home
+    Página Inicial
 {% endblock %}
 
 {% block content %}
-    <h1>Tela Inicial</h1>
+<h1 class="mt-4 mb-4">Tela Inicial</h1>
 
-    <p>Total de alunos: {{ total_student }}</p><br>
-    <p>Cursos ativos: {{ active_courses }}</p><br>
-    <p>Matrículas pagas: {{ paid_enrollments }}</p><br>
-    <p>Matrículas pendentes: {{ pending_enrollments }}</p><br>
-
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-primary text-white m-0 p-0 fs-5 mb-4">
+                <div class="card-body fw-bold">Total de alunos</div>
+                <div class="card-footer d-flex align-items-center justify-content-center">
+                        <p class="text-white m-0 p-0 fs-3">{{ total_student }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white m-0 p-0 fs-5 mb-4">
+                <div class="card-body fw-bold">Cursos ativos</div>
+                <div class="card-footer d-flex align-items-center justify-content-center">
+                    <p class="text-white m-0 p-0 fs-3">{{ active_courses }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white m-0 p-0 fs-5 mb-4">
+                <div class="card-body fw-bold">Matrículas pagas</div>
+                <div class="card-footer d-flex align-items-center justify-content-center">
+                    <p class="text-white m-0 p-0 fs-3">{{ paid_enrollments }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="card bg-danger text-white m-0 p-0 fs-5 mb-4">
+                <div class="card-body fw-bold">Matrículas pendentes</div>
+                <div class="card-footer d-flex align-items-center justify-content-center">
+                    <p class="text-white m-0 p-0 fs-3">{{ pending_enrollments }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
