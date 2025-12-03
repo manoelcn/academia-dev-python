@@ -5,31 +5,38 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Lista de Estudantes</h1>
+    <h1 class="mt-4 mb-4">Lista de Alunos</h1>
 
     {% if students %}
-    <table>
-        <thead>
-            <tr>
-                <th >Nome</th>
-                <th >Email</th>
-                <th >CPF</th>
-                <th >Data de Ingresso</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for student in students %}
-            <tr>
-                <td >{{ student.name }}</td>
-                <td >{{ student.email }}</td>
-                <td >{{ student.cpf }}</td>
-                <td >{{ student.admission_date|date:"d/m/Y H:i" }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                        <th>Data de Ingresso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.email }}</td>
+                        <td><span class="text-muted small">{{ student.cpf }}</span></td>
+                        <td>{{ student.admission_date|date:"d/m/Y H:i" }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     {% else %}
-    <p>Nenhum aluno encontrado.</p>
+        <div class="alert alert-warning text-center" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Atenção!</strong> Nenhum aluno foi encontrado no sistema.
+        </div>
     {% endif %}
 
 {% endblock %}
