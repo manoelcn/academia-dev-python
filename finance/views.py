@@ -1,12 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from courses.models import Course
 from enrollments.models import Enrollment
 from students.models import Student
 from django.views.generic import ListView
 
-
-def finance(request):
-    return render(request, 'finance.html', {})
 
 def enrollments_by_status(request):
     status = request.GET.get('status')
@@ -19,7 +16,7 @@ def enrollments_by_status(request):
     return render(request, 'enrollments_by_status.html', context)
 
 def get_financial_status(request, pk):
-    student = Student.objects.get(pk=pk)
+    student = get_object_or_404(Student, pk=pk)
     paid_enrollments = Enrollment.objects.filter(status='pago', student_id=student)
     pending_enrollments = Enrollment.objects.filter(status='pendente', student_id=student)
     total_paid = sum(enrollment.course.enrollment_fee for enrollment in paid_enrollments)
