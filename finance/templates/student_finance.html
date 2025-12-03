@@ -1,22 +1,61 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Lista Financeira de {{ student.name }}
+    Lista Financeira de {{ student.name }}
 {% endblock %}
 
-
 {% block content %}
-{% if student %}
-<ul>
+    <h1 class="mt-4 mb-4">Resumo Financeiro de {{ student.name }}</h1>
 
-    <li>
-        Total pago pelo aluno: {{ total_paid }}
-    </li>
-    <li>
-        Total devido pelo aluno: {{ total_pending }}
-    </li>
+    {% if student %}
+
+        <div class="row">
+            
+            <div class="col-xl-6 col-md-6 mb-4">
+                <div class="card bg-success text-white shadow h-100">
+                    <div class="card-body py-2">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col me-2">
+                                <div class="text-xs fw-bold text-uppercase mb-1">
+                                    Total Pago pelo Aluno
+                                </div>
+                                <div class="h4 mb-0 text-white">
+                                    R$ {{ total_paid|floatformat:2 }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-6 col-md-6 mb-4">
+                <div class="card bg-danger text-white shadow h-100">
+                    <div class="card-body py-2">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col me-2">
+                                <div class="text-xs fw-bold text-uppercase mb-1">
+                                    Total Devido (Pendente)
+                                </div>
+                                <div class="h4 mb-0 text-white">
+                                    R$ {{ total_pending|floatformat:2 }}
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-exclamation-triangle fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     {% else %}
-    <p>Nenhum resultado encontrado.</p>
+        <div class="alert alert-warning text-center" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Atenção!</strong> Nenhum resultado financeiro encontrado para este aluno.
+        </div>
     {% endif %}
-</ul>
 {% endblock %}
