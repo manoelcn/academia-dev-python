@@ -12,7 +12,7 @@
     <a href="?status=pago" class="btn btn-sm btn-success me-2">
         Pagas
     </a>
-    <a href="?status=pendente" class="btn btn-sm btn-warning me-2">
+    <a href="?status=pendente" class="btn btn-sm btn-danger me-2">
         Pendentes
     </a>
     <a href="{% url 'finance-enrollments' %}" class="btn btn-sm btn-secondary">
@@ -43,7 +43,7 @@
                             {% if enrollment.status == 'pago' %}
                                 <span class="badge bg-success">Pago</span>
                             {% elif enrollment.status == 'pendente' %}
-                                <span class="badge bg-warning">Pendente</span>
+                                <span class="badge bg-danger">Pendente</span>
                             {% else %}
                                 <span class="badge bg-secondary">{{ enrollment.status|capfirst }}</span>
                             {% endif %}
