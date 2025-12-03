@@ -36,7 +36,7 @@
                 <tbody>
                     {% for enrollment in enrollments %}
                     <tr>
-                        <td><a href="{% url 'student-detail' enrollment.student.pk %}" class="link-offset-2 link-underline link-underline-opacity-50">{{ enrollment.student.name }}</a></td>
+                        <td><a href="{% url 'finance-student' enrollment.student.pk %}" class="link-offset-2 link-underline link-underline-opacity-50">{{ enrollment.student.name }}</a></td>
                         <td>{{ enrollment.course.name }}</td>
                         <td>{{ enrollment.enrollment_date|date:"d/m/Y" }}</td>
                         <td>
