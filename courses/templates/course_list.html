@@ -5,31 +5,39 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Lista de Cursos</h1>
+    <h1 class="mt-4 mb-4">Lista de Cursos</h1>
 
     {% if courses %}
-    <table>
-        <thead>
-            <tr>
-                <th >Nome</th>
-                <th >Carga horária</th>
-                <th >Valor da inscrição</th>
-                <th >Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for course in courses %}
-            <tr>
-                <td >{{ course.name }}</td>
-                <td >{{ course.duration_hours }}</td>
-                <td >{{ course.enrollment_fee }}</td>
-                <td >{{ course.status }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+
+    <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Carga Horária</th>
+                        <th>Valor da Inscrição</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.duration_hours }}h</td>
+                        <td><span class="text-muted small">R$ {{ course.enrollment_fee }}</span></td>
+                        <td>{{ course.status     }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     {% else %}
-    <p>Nenhum curso encontrado.</p>
+        <div class="alert alert-warning text-center" role="alert">
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <strong>Atenção!</strong> Nenhum curso foi encontrado no sistema.
+        </div>
     {% endif %}
 
 {% endblock %}
