@@ -1,7 +1,7 @@
 from django.views.generic import ListView
 from rest_framework import generics
 from enrollments.models import Enrollment
-from enrollments.serializers import EnrollmentSerializer
+from enrollments.serializers import EnrollmentSerializer, EnrollmentUpdateSerializer
 
 
 class EnrollmentListView(ListView):
@@ -12,3 +12,8 @@ class EnrollmentListView(ListView):
 class EnrollmentCreateListAPIView(generics.ListCreateAPIView):
     queryset = Enrollment.objects.all()
     serializer_class = EnrollmentSerializer
+
+class EnrollmentRetriveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    queryset = Enrollment.objects.all()
+    serializer_class = EnrollmentUpdateSerializer
+
