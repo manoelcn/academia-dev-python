@@ -22,14 +22,8 @@ def get_financial_status(request, pk):
     student = Student.objects.get(pk=pk)
     paid_enrollments = Enrollment.objects.filter(status='pago', student_id=student)
     pending_enrollments = Enrollment.objects.filter(status='pendente', student_id=student)
-    total_paid = 0
-    total_pending = 0
-
-    for enrollment in paid_enrollments:
-        total_paid += enrollment.course.enrollment_fee
-
-    for enrollment in pending_enrollments:
-        total_pending += enrollment.course.enrollment_fee
+    total_paid = sum(enrollment.course.enrollment_fee for enrollment in paid_enrollments)
+    total_pending = sum(enrollment.course.enrollment_fee for enrollment in pending_enrollments)
 
     context = {
         'student': student,
