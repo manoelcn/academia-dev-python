@@ -8,4 +8,5 @@ urlpatterns = [
 
     path('api/v1/students/', views.StudentCreateListAPIView.as_view(), name='student-create-list-api'),
     path('api/v1/students/<int:pk>/', views.StudentRetriveUpdateDestroyAPIView.as_view(), name='student-detail-api'),
+    path('api/v1/students/reports/<int:pk>/', views.StudentReportAPIView.as_view(), name='student-report-api'),
 ]
