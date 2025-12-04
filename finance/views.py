@@ -17,14 +17,30 @@ def enrollments_by_status(request):
 
 def get_financial_status(request, pk):
     student = get_object_or_404(Student, pk=pk)
-    paid_enrollments = Enrollment.objects.filter(status='pago', student_id=student)
-    pending_enrollments = Enrollment.objects.filter(status='pendente', student_id=student)
-    total_paid = sum(enrollment.course.enrollment_fee for enrollment in paid_enrollments)
-    total_pending = sum(enrollment.course.enrollment_fee for enrollment in pending_enrollments)
-
+    sql = """
+        SELECT 
+            enrollment.id,
+            enrollment.status,
+            SUM(course.enrollment_fee) AS total
+        FROM enrollments_enrollment AS enrollment
+        JOIN courses_course AS course 
+            ON course.id = enrollment.course_id
+        WHERE enrollment.student_id = %s
+        GROUP BY 
+            enrollment.id,
+            enrollment.status;
+    """
+    rows = Enrollment.objects.raw(sql, [pk])
+    total_paid = 0
+    total_pending = 0
+    for row in rows:
+        if row.status == 'pago':
+            total_paid += row.total
+        else:
+            total_pending += row.total
     context = {
         'student': student,
         'total_paid': total_paid,
         'total_pending': total_pending
-        }
+    }
     return render(request, 'student_finance.html', context)
