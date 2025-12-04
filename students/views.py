@@ -1,7 +1,8 @@
 from django.views.generic import ListView, DetailView
 from rest_framework import generics
+from rest_framework.response import Response
 from students.models import Student
-from students.serializers import StudentSerializer
+from students.serializers import StudentSerializer, StudentReportSerializer
 from enrollments.models import Enrollment
 
 
@@ -36,3 +37,18 @@ class StudentCreateListAPIView(generics.ListCreateAPIView):
 class StudentRetriveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+
+class StudentReportAPIView(generics.RetrieveAPIView):
+    queryset = Student.objects.all()
+    serializer_class = StudentReportSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        student = self.get_object()
+        pending_enrollments = Enrollment.objects.filter(status='pendente', student_id=student)
+        total_pending = sum(enrollment.course.enrollment_fee for enrollment in pending_enrollments)
+        context = {
+            'student_name': student.name,
+            'total_pending': total_pending,
+        }
+        serializer = self.get_serializer(context)
+        return Response(serializer.data)
