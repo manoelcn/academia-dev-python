@@ -2,7 +2,7 @@ from django.views.generic import ListView, DetailView
 from rest_framework import generics
 from rest_framework.response import Response
 from students.models import Student
-from students.serializers import StudentSerializer, StudentReportSerializer
+from students.serializers import StudentSerializer, StudentReportSerializer, StudentEnrollmentsSerializer
 from enrollments.models import Enrollment
 
 
@@ -52,3 +52,10 @@ class StudentReportAPIView(generics.RetrieveAPIView):
         }
         serializer = self.get_serializer(context)
         return Response(serializer.data)
+
+class StudentEnrollmentListAPIView(generics.ListAPIView):
+    serializer_class = StudentEnrollmentsSerializer
+    def get_queryset(self):
+        student_pk = self.kwargs['pk']
+        queryset = Enrollment.objects.filter(student_id=student_pk)
+        return queryset
